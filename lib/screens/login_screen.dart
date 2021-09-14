@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   String _email = '';
   String _password = '';
+  bool _rememberme = true;
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +23,8 @@ class _LoginScreenState extends State<LoginScreen> {
           SizedBox(height: 20),
           _showEmail(),
           _ShowPassword(),
+          _showRememberme(),
+          _showButtons(),
         ],
       )),
     );
@@ -67,6 +70,56 @@ class _LoginScreenState extends State<LoginScreen> {
         onChanged: (value) {
           _password = value;
         },
+      ),
+    );
+  }
+
+  Widget _showRememberme() {
+    return CheckboxListTile(
+      title: Text('Recuerdame'),
+      value: _rememberme,
+      onChanged: (value) {
+        setState(() {
+          _rememberme = value!;
+        });
+      },
+    );
+  }
+
+  Widget _showButtons() {
+    return Container(
+      margin: EdgeInsets.only(left: 10, right: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[
+          Expanded(
+            child: ElevatedButton(
+              child: Text('Iniciar Sección'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  return Color(0xFF5DA3FA);
+                }),
+              ),
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Expanded(
+            child: ElevatedButton(
+              child: Text('Nuevo usuario'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                    (Set<MaterialState> states) {
+                  return Color(0xFF5DA3FA);
+                }),
+              ),
+              onPressed: () {},
+            ),
+          ),
+        ],
       ),
     );
   }
